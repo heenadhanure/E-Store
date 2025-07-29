@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,10 +29,20 @@ public class OrderController {
     private OrderRepository orderRepository;
     
     @PostMapping		// Place new order
-    public ResponseEntity<Order> placeOrder(@RequestBody Order order) {
-    	Order saveOrder = orderRepository.save(order);
-    	System.out.println("Selected Payment Method: " + order.getPaymentMethod());
-    	return ResponseEntity.ok(saveOrder);
+    public ResponseEntity<?> placeOrder(@RequestBody Order order) {
+    	 Order order1 = new Order();
+    	    order1.setUserId(order.getUserId());
+    	    order1.setCustomerName(order.getCustomerName());
+    	    order1.setItems(order.getItems());
+    	    order1.setTotalAmount(order.getTotalAmount());
+    	    order1.setPaymentMethod(order.getPaymentMethod()); // or getPaymentMethod()
+    	    order1.setPaymentStatus(order.getPaymentStatus());
+    	    order1.setDeliveryAddress(order.getDeliveryAddress());
+    	    order1.setOrderStatus(order.getOrderStatus());
+    	    order1.setOrderDate(order.getOrderDate());
+
+    	    orderRepository.save(order1);
+    	    return ResponseEntity.ok("Order placed");
     }
 
     @GetMapping("/user/{userId}")	// View past orders of customer
@@ -51,7 +60,7 @@ public class OrderController {
         return orderService.getAllOrders();
     }
 
-    @GetMapping("/count")	// show the count of no. of orders to admin
+    @GetMapping("/count")	// show no. of orders to admin
     public Long getOrderCount() {
         return orderService.getOrderCount();
     }

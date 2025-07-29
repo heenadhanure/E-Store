@@ -14,7 +14,7 @@ public class GatewayCorsConfig {
     @Bean
     public CorsWebFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOriginPatterns(Arrays.asList("http://localhost:3000")); // use allowedOriginPatterns for wildcard
+        config.setAllowedOriginPatterns(Arrays.asList("http://localhost:3000","http://localhost:3001")); // use allowedOriginPatterns for wildcard
         config.setAllowCredentials(true);
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");

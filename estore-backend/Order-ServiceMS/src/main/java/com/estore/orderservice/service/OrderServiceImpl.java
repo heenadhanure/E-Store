@@ -47,6 +47,11 @@ public class OrderServiceImpl implements OrderService {
         Order order = getOrderById(id);
         if (order != null) {
             order.setOrderStatus(OrderStatus.valueOf(status.toUpperCase())); // safely convert string to enum
+            
+            if(status.equalsIgnoreCase("DELIVERED")) {
+            	order.setPaymentStatus("PAID");
+            }
+            
             return orderRepository.save(order);
         }
         return null;

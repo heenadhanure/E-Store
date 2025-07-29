@@ -1,0 +1,23 @@
+package com.estore.productservice;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+
+@SpringBootApplication
+public class ProductServiceApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ProductServiceApplication.class, args);
+	}
+	
+	@Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/product-images/**")
+                .allowedOrigins("http://localhost:3000") // or use allowedOriginPatterns("*") if needed
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowedHeaders("*")
+                .allowCredentials(true);
+    }
+
+}

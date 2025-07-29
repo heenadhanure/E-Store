@@ -1,0 +1,50 @@
+package com.estore.orderservice.model;
+
+import java.time.LocalDateTime;
+
+import com.estore.orderservice.enums.OrderStatus;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@Table(name="orders")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class Order {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
+	
+	private String userId;
+	
+	private String customerName;
+	
+	@Lob
+	private String items;	// store JSON string of cart items
+	
+	private Double totalAmount;
+	
+	private String paymentStatus; // Pending, Paid
+	
+	@Enumerated(EnumType.STRING)
+	private OrderStatus orderStatus;	// Placed, Shipped, Delivered
+	
+	private String paymentMethod;
+	
+	private LocalDateTime orderDate;
+}

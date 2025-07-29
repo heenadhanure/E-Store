@@ -108,7 +108,7 @@ const Products = () => {
           <table className="table table-bordered table-striped">
             <thead className="table-dark">
               <tr>
-                <th>#</th>
+                <th>Sr.No.</th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Price (₹)</th>

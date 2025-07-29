@@ -23,13 +23,20 @@ public class WebConfig implements WebMvcConfigurer {
 			.addResourceLocations("file:" + Paths.get("product-images").toAbsolutePath().toString() + "/");
 	}
 	
-	@Override
-    public void addCorsMappings(CorsRegistry registry) {
-        // This is very important for image loading
-        registry.addMapping("/product-images/**")
-                .allowedOrigins("*") // You can specify http://localhost:3001 instead of *
-                .allowedMethods("GET");
-    }
-
+	/*
+	 * @Override public void addCorsMappings(CorsRegistry registry) { // This is
+	 * very important for image loading registry.addMapping("/product-images/**")
+	 * .allowedOrigins("*") // You can specify http://localhost:3001 instead of *
+	 * .allowedMethods("GET"); }
+	 */
+	
+	 @Override
+	    public void addCorsMappings(CorsRegistry registry) {
+	        registry.addMapping("/product-images/**")
+	                .allowedOrigins("http://localhost:3000")  // React app origin
+	                .allowedMethods("GET", "POST", "PUT", "DELETE")
+	                .allowedHeaders("*")
+	                .allowCredentials(true);
+	    }
 }
 

@@ -1,0 +1,82 @@
+.admin-users-tab {
+  padding: 20px;
+}
+
+.section-title {
+  font-size: 24px;
+  margin-bottom: 15px;
+  font-weight: 700;
+  color: #222;
+  text-align: left;
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+  margin-top: 18px;
+}
+
+.users-table th, 
+.users-table td {
+  text-align: center;
+  vertical-align: middle;
+  padding: 14px 8px;
+  font-size: 15px;
+}
+
+.users-table th {
+  background: #212529;
+  color: #fff;
+  font-weight: 600;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.users-table td {
+  border: 1px solid #dee2e6;
+}
+
+.users-table tbody tr:nth-of-type(odd) {
+  background: #f8f9fa;
+}
+
+.users-table tbody tr:nth-of-type(even) {
+  background: #fff;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+@media (max-width: 900px) {
+  .admin-users-tab {
+    padding: 12px 4px;
+    max-width: 100%;
+  }
+  .users-table th, 
+  .users-table td {
+    padding: 8px 4px;
+    font-size: 13px;
+  }
+  .section-title {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-users-tab {
+    padding: 4px 2px;
+  }
+  .users-table th, 
+  .users-table td {
+    padding: 6px 2px;
+    font-size: 12px;
+  }
+  .section-title {
+    font-size: 18px;
+  }
+}

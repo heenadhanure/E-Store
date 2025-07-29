@@ -1,9 +1,10 @@
 package com.estore.orderservice.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,19 +16,33 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.estore.orderservice.enums.OrderStatus;
 import com.estore.orderservice.model.Order;
+import com.estore.orderservice.repository.OrderRepository;
 import com.estore.orderservice.service.OrderServiceImpl;
 
 @RestController
 @RequestMapping("/orders")
-@CrossOrigin(origins = "http://localhost:3000")
 public class OrderController {
 
     @Autowired
     private OrderServiceImpl orderService;
 
+    @Autowired
+    private OrderRepository orderRepository;
+    
     @PostMapping		// Place new order
-    public Order placeOrder(@RequestBody Order order) {
-        return orderService.placeOrder(order);
+    public ResponseEntity<Order> placeOrder(@RequestBody Order order) {
+    	 Order order = new Order();
+    	    order.setUserId(order.getUserId());
+    	    order.setCustomerName(order.getCustomerName());
+    	    order.setItems(order.getItems());
+    	    order.setTotalAmount(order.getTotalAmount());
+    	    order.setPaymentMethod(order.getPaymentMode()); // or getPaymentMethod()
+    	    order.setPaymentStatus(order.getPaymentStatus());
+    	    order.setOrderStatus(order.getOrderStatus());
+    	    order.setOrderDate(LocalDateTime.parse(order.getOrderDate()));
+
+    	    orderRepository.save(order);
+    	    return ResponseEntity.ok("Order placed");
     }
 
     @GetMapping("/user/{userId}")	// View past orders of customer
@@ -60,15 +75,13 @@ public class OrderController {
         return orderService.getOrdersByStatus(status);  
     }
     
-    @GetMapping("/sort/date")
-    public List<Order> sortByDate(@RequestParam boolean asc) {
-        return orderService.sortOrdersByDate(asc);
-    }
-    
-    @GetMapping("/sort/amount")
-    public List<Order> sortByAmount(@RequestParam boolean asc) {
-        return orderService.sortOrdersByAmount(asc);
-    }
+	/*
+	 * @GetMapping("/sort/date") public List<Order> sortByDate(@RequestParam boolean
+	 * asc) { return orderService.sortOrdersByDate(asc); }
+	 * 
+	 * @GetMapping("/sort/amount") public List<Order> sortByAmount(@RequestParam
+	 * boolean asc) { return orderService.sortOrdersByAmount(asc); }
+	 */
 
     @PutMapping("/{orderId}/status")	// Change order status
     public Order updateOrderStatus(@PathVariable Long orderId, @RequestParam String status) {

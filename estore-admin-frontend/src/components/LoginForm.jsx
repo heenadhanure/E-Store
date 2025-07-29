@@ -15,10 +15,10 @@ const LoginForm = () => {
     // Static credentials check
     if (email === 'admin' && password === 'admin@123') {
       login('static-admin-token'); // dummy token
-      toast.success('Login successful!');
+    toast.success('Login successful!', { autoClose: 1000 });  // 👈 2 seconds
       navigate('/dashboard');
     } else {
-      toast.error('Invalid username or password');
+      toast.error('Invalid username or password', { autoClose: 2000 }); // 👈 2 seconds
     }
   };
 

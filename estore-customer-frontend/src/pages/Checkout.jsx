@@ -14,7 +14,7 @@ const Checkout = () => {
     name: '',
     address: '',
     phone: '',
-    paymentMode: 'COD',
+    paymentMethod: 'Cash on Delivery', // default payment method
   });
 
   // 🟢 Fetch cart items from backend
@@ -47,13 +47,17 @@ const Checkout = () => {
 
     const orderPayload = {
       userId: user.id,
+      customerName: formData.name,
+      deliveryAddress: formData.address,  
+      customerPhone: formData.phone,
       items: JSON.stringify(cartItems), // send entire cart as JSON string
       totalAmount: getTotalPrice(),
       paymentStatus: "Pending",
       orderStatus: "PLACED",
-      paymentMode: formData.paymentMode,
+      paymentMethod: formData.paymentMethod,
       orderDate: new Date().toISOString()
     };
+    console.log('Order payload:', orderPayload);
 
     try {
       await axios.post(`${API_BASE_URL}/api/orders`, orderPayload);
@@ -87,7 +91,7 @@ const Checkout = () => {
               <input
                 type="text"
                 name="name"
-                placeholder="Full Name"
+                placeholder="Full Name"A
                 value={formData.name}
                 onChange={handleChange}
                 required
@@ -112,7 +116,7 @@ const Checkout = () => {
 
             <div className="section">
               <h3>Payment Method</h3>
-              <select name="paymentMode" value={formData.paymentMode} onChange={handleChange}>
+              <select name="paymentMethod" value={formData.paymentMethod} onChange={handleChange}>
                 <option value="COD">Cash on Delivery</option>
                 <option value="UPI">UPI</option>
                 <option value="Card">Credit/Debit Card</option>

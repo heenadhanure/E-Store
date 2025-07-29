@@ -33,12 +33,15 @@ public class Order {
 	private String userId;
 	
 	private String customerName;
+	
 	@Lob
 	private String items;	// store JSON string of cart items
 	
 	private Double totalAmount;
 	
 	private String paymentStatus; // Pending, Paid
+	
+	private String deliveryAddress;
 	
 	@Enumerated(EnumType.STRING)
 	private OrderStatus orderStatus;	// Placed, Shipped, Delivered

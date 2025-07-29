@@ -42,14 +42,15 @@ const AdminOrders = () => {
           <table className="table table-bordered table-striped">
             <thead className="table-dark">
               <tr>
-                <th>#</th>
+                <th>Sr.No.</th>
                 <th>Customer</th>
                 <th>Products</th>
+                <th>Delivery Address</th>
                 <th>Total (₹)</th>
                 <th>Payment Method</th>
                 <th>Payment Status</th>
-                <th>Status</th>
-                <th>Change</th>
+                <th>Delivery Status</th>
+                <th>Change Status</th>
               </tr>
             </thead>
             <tbody>
@@ -68,6 +69,7 @@ const AdminOrders = () => {
                       <td>{index + 1}</td>
                       <td>{order.customerName || 'Unknown'}</td>
                       <td>{productNames}</td>
+                      <td>{order.deliveryAddress}</td>
                       <td>{order.totalAmount}</td>
                       <td>{order.paymentMethod}</td>
                       <td>{order.paymentStatus}</td>

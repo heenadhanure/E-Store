@@ -10,6 +10,7 @@ import { ToastContainer } from 'react-toastify';
 import Products from './pages/Products';
 import Orders from './pages/Orders';
 import RepairRequests from './pages/RepairRequests';
+import Users from './pages/Users';
 
 function App() {
   return (
@@ -46,6 +47,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <RepairRequests />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/users"
+            element={
+              <ProtectedRoute>
+                <Users />
               </ProtectedRoute>
             }
           />
