@@ -1,0 +1,71 @@
+package com.estore.orderservice.service;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.estore.orderservice.enums.OrderStatus;
+import com.estore.orderservice.model.Order;
+import com.estore.orderservice.repository.OrderRepository;
+
+@Service
+public class OrderServiceImpl implements OrderService {
+
+    @Autowired
+    private OrderRepository orderRepository;
+
+    public Order placeOrder(Order order) {
+        order.setOrderStatus(OrderStatus.PLACED);
+        order.setPaymentStatus("PENDING");
+        order.setOrderDate(LocalDateTime.now());
+        return orderRepository.save(order);
+    }
+
+    public List<Order> getOrdersByUser(String userId) {
+        return orderRepository.findByUserId(userId);
+    }
+
+    public Order getOrderById(Long id) {
+        return orderRepository.findById(id).orElse(null);
+    }
+
+    public List<Order> getAllOrders() {		// Admin 
+        return orderRepository.findAll();
+    }
+
+    public Long getOrderCount() {			// Admin
+        return orderRepository.count();
+    }
+
+    public Double getTotalRevenue() {		// Admin
+        return orderRepository.getTotalRevenue();
+    }
+
+    public Order updateStatus(Long id, String status) {
+        Order order = getOrderById(id);
+        if (order != null) {
+            order.setOrderStatus(OrderStatus.valueOf(status.toUpperCase())); // safely convert string to enum
+            return orderRepository.save(order);
+        }
+        return null;
+    }
+
+	@Override
+	public List<Order> getOrdersByStatus(OrderStatus status) {
+		return orderRepository.findByOrderStatus(status);
+	}
+
+	@Override
+	public List<Order> sortOrdersByDate(boolean asc) {
+        return asc ? orderRepository.findAllOrderByDateAsc() : orderRepository.findAllOrderByDateDesc();
+	}
+
+	@Override
+	public List<Order> sortOrdersByAmount(boolean asc) {
+        return asc ? orderRepository.findAllOrderByAmountAsc() : orderRepository.findAllOrderByAmountDesc();
+	}
+    
+    
+}

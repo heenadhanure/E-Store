@@ -1,0 +1,225 @@
+.products-page {
+  padding: 40px 20px;
+  background: linear-gradient(120deg, #f0f4ff 0%, #f9f9f9 100%);
+  min-height: 100vh;
+}
+
+.products-page h1 {
+  color: #2a3b8f;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 32px;
+}
+
+.products-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+@media (max-width: 900px) {
+  .products-content {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+.products-sidebar {
+  width: 240px;
+  background: #fff;
+  padding: 28px 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px rgba(42, 59, 143, 0.07);
+  text-align: left;
+  margin-right: 32px;
+  height: fit-content;
+  border: 1px solid #e3e8f7;
+}
+
+.products-sidebar h4, .products-sidebar h6 {
+  color: #2a3b8f;
+  margin-bottom: 12px;
+}
+
+.products-sidebar label {
+  color: #444;
+  font-size: 15px;
+  margin-bottom: 8px;
+  display: block;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.products-sidebar input[type="checkbox"],
+.products-sidebar input[type="radio"] {
+  accent-color: #2a3b8f;
+  margin-right: 8px;
+}
+
+.products-sidebar label:hover {
+  color: #2a3b8f;
+}
+
+.products-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  justify-content: flex-start;
+  padding: 8px 0;
+}
+
+/* Show 4 cards per row on large screens */
+.product-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(42, 59, 143, 0.08);
+  border: 1px solid #e3e8f7;
+  padding: 18px 14px;
+  transition: box-shadow 0.2s, transform 0.2s;
+  width: calc(25% - 21px); /* 4 per row, minus gap */
+  min-width: 220px;
+  max-width: 1fr;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Responsive: 2 per row on tablets */
+@media (max-width: 1100px) {
+  .product-card {
+    width: calc(50% - 14px);
+  }
+}
+
+/* Responsive: 1 per row on mobile */
+@media (max-width: 700px) {
+  .product-card {
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .products-sidebar {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 24px;
+  }
+}
+
+/* Example ProductCard styling for a modern look */
+.product-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(42, 59, 143, 0.08);
+  border: 1px solid #e3e8f7;
+  padding: 18px 14px;
+  transition: box-shadow 0.2s, transform 0.2s;
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-card:hover {
+  box-shadow: 0 8px 32px rgba(42, 59, 143, 0.13);
+  transform: translateY(-4px) scale(1.03);
+}
+
+.product-card img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.product-card h5 {
+  color: #2a3b8f;
+  font-size: 18px;
+  margin: 8px 0 4px 0;
+  font-weight: 600;
+}
+
+.product-card .price {
+  color: #1e7e34;
+  font-size: 17px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.product-card button {
+  background: linear-gradient(90deg, #2a3b8f 0%, #4f8cff 100%);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.product-card button:hover {
+  background: linear-gradient(90deg, #4f8cff 0%, #2a3b8f 100%);
+}
+
+.filter-toggle-btn {
+  display: none;
+  margin-bottom: 16px;
+  padding: 10px 22px;
+  background: linear-gradient(90deg, #2a3b8f 0%, #4f8cff 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.apply-filter-btn {
+  display: block;
+  width: 100%;
+  margin-top: 18px;
+  padding: 10px 0;
+  background: linear-gradient(90deg, #2a3b8f 0%, #4f8cff 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.apply-filter-btn:hover {
+  background: linear-gradient(90deg, #4f8cff 0%, #2a3b8f 100%);
+}
+
+@media (max-width: 900px) {
+  .filter-toggle-btn {
+    display: block;
+    width: 100%;
+  }
+  .products-sidebar {
+    display: none;
+    position: absolute;
+    top: 110px; /* adjust as needed for your header */
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 8px 32px rgba(42, 59, 143, 0.13);
+    margin-bottom: 24px;
+    border-radius: 0 0 14px 14px;
+    padding: 28px 20px;
+    border: 1px solid #e3e8f7;
+    animation: slideDown 0.3s;
+  }
+  .products-sidebar.show {
+    display: block;
+  }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px);}
+  to { opacity: 1; transform: translateY(0);}
+}

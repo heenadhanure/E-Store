@@ -1,0 +1,129 @@
+.repair-form-page {
+  min-height: 100vh;
+  background: linear-gradient(120deg, #f0f4ff 0%, #f9f9f9 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 40px;
+}
+
+.repair-form-page h2 {
+  color: #2a3b8f;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 28px;
+  letter-spacing: 1px;
+}
+
+.repair-form {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 32px rgba(42, 59, 143, 0.10);
+  padding: 36px 32px 28px 32px;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  border: 1px solid #e3e8f7;
+}
+
+.repair-form input,
+.repair-form select,
+.repair-form textarea {
+  border: 1px solid #c7d0f7;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 16px;
+  background: #f7faff;
+  transition: border 0.2s;
+  outline: none;
+}
+
+.repair-form input:focus,
+.repair-form select:focus,
+.repair-form textarea:focus {
+  border: 1.5px solid #2a3b8f;
+  background: #fff;
+}
+
+.repair-form button {
+  background: linear-gradient(90deg, #2a3b8f 0%, #4f8cff 100%);
+  color: #fff;
+  border: none;
+  padding: 12px 0;
+  border-radius: 8px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(42, 59, 143, 0.08);
+}
+
+.repair-form button:hover {
+  background: linear-gradient(90deg, #4f8cff 0%, #2a3b8f 100%);
+}
+
+.success-msg {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.popup-msg {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #e6fff2;
+  color: #0a0a23;
+  border: 2px solid #00e6e6;
+  border-radius: 12px;
+  padding: 32px 40px;
+  text-align: center;
+  z-index: 9999;
+  box-shadow: 0 8px 32px rgba(0, 230, 230, 0.13);
+  font-size: 1.2rem;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 10, 35, 0.55);
+  z-index: 9998;
+}
+
+.repair-form label {
+  font-size: 15px;
+  color: #2a3b8f;
+  margin-bottom: 4px;
+  font-weight: 500;
+  display: block;
+}
+
+.form-error {
+  color: #d32f2f;
+  font-size: 13px;
+  margin-bottom: 6px;
+  margin-top: -10px;
+  display: block;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .repair-form {
+    padding: 22px 8px 18px 8px;
+    max-width: 98vw;
+  }
+  .popup-msg {
+    padding: 18px 8px;
+    font-size: 1rem;
+  }
+}

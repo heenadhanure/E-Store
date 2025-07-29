@@ -1,0 +1,18 @@
+package com.estore.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+    @Bean
+    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+        return http
+                .csrf().disable()
+                .authorizeExchange(exchanges -> exchanges
+                        .pathMatchers("/**").permitAll()
+                )
+                .build();
+    }
+}

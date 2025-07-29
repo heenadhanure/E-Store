@@ -1,0 +1,97 @@
+.repair-requests-container {
+  max-width: 1100px;
+  margin: 32px auto;
+  padding: 24px 16px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+
+.repair-requests-title {
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.repair-requests-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+}
+
+.repair-requests-table th, 
+.repair-requests-table td {
+  text-align: center;
+  vertical-align: middle;
+  padding: 14px 8px;
+  font-size: 15px;
+}
+
+.repair-requests-table th {
+  background: #212529;
+  color: #fff;
+  font-weight: 600;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.repair-requests-table td {
+  border: 1px solid #dee2e6;
+}
+
+.repair-requests-table tbody tr:nth-of-type(odd) {
+  background: #f8f9fa;
+}
+
+.repair-requests-table tbody tr:nth-of-type(even) {
+  background: #fff;
+}
+
+.form-select {
+  min-width: 120px;
+  padding: 7px 12px;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+  background: #f8f9fa;
+  font-size: 15px;
+  transition: border-color 0.2s;
+}
+
+.form-select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+@media (max-width: 900px) {
+  .repair-requests-container {
+    padding: 12px 4px;
+    max-width: 100%;
+  }
+  .repair-requests-table th, 
+  .repair-requests-table td {
+    padding: 8px 4px;
+    font-size: 13px;
+  }
+  .repair-requests-title {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .repair-requests-container {
+    padding: 4px 2px;
+  }
+  .repair-requests-table th, 
+  .repair-requests-table td {
+    padding: 6px 2px;
+    font-size: 12px;
+  }
+}

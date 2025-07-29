@@ -1,0 +1,135 @@
+package com.estore.productservice.controller;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.estore.productservice.model.Product;
+import com.estore.productservice.repository.ProductRepository;
+import com.estore.productservice.service.ProductService;
+
+@RestController
+@RequestMapping("/products")
+public class ProductController {
+	@Autowired
+	private ProductRepository productRepository;
+	
+	@Autowired
+	private ProductService productService;
+	
+	@GetMapping
+	public List<Product> getAll(){
+		return productService.getAllProducts();
+	}
+	
+	@GetMapping("/{id}")
+	public Product getById(@PathVariable Long id) {
+		return productService.getProductById(id);
+	}
+	
+	@GetMapping("/count")
+	public Long getProductCount() {
+		return productRepository.count();
+	}
+	
+	@PostMapping 		// Admin Operation
+	public ResponseEntity<Product> createProducts(
+	    @RequestParam("name") String name,
+	    @RequestParam("description") String description,
+	    @RequestParam("price") double price,
+	    @RequestParam(value = "image", required = false) MultipartFile image
+	) throws IOException {
+
+	    String imagePath = null;
+	    if (image != null && !image.isEmpty()) {
+	        String uploadDir = System.getProperty("user.dir") + File.separator + "product-images";
+	        File dir = new File(uploadDir);
+	        if (!dir.exists()) dir.mkdirs();
+
+	        String filename = UUID.randomUUID() + "_" + image.getOriginalFilename();
+	        File saveFile = new File(uploadDir, filename);
+	        image.transferTo(saveFile);
+
+	        // Image URL to be served through API Gateway (React will fetch from localhost:4041)
+	        imagePath = "/product-images/" + filename;
+	    }
+
+	    Product product = new Product();
+	    product.setName(name);
+	    product.setDescription(description);
+	    product.setPrice(price);
+	    product.setImageUrl(imagePath); // ✅ Set image URL here
+
+	    return ResponseEntity.ok(productRepository.save(product));
+	}
+
+	@PutMapping("/{id}")		// Admin Operation
+	public ResponseEntity<Product> updateProduct(
+	        @PathVariable Long id,
+	        @RequestParam("name") String name,
+	        @RequestParam("description") String description,
+	        @RequestParam("price") double price,
+	        @RequestParam("category") String category,
+	        @RequestParam(value = "image", required = false) MultipartFile image
+	) throws IOException {
+	    
+	    Product product = productRepository.findById(id).orElse(null);
+	    if (product == null) {
+	        return ResponseEntity.notFound().build();
+	    }
+
+	    product.setName(name);
+	    product.setDescription(description);
+	    product.setPrice(price);
+//	    product.setCategory(category);
+
+	    if (image != null && !image.isEmpty()) {
+	        String uploadDir = "product-images/";
+	        String imagePath = uploadDir + UUID.randomUUID() + "_" + image.getOriginalFilename();
+	        File saveFile = new File(imagePath);
+	        saveFile.getParentFile().mkdirs();
+	        image.transferTo(saveFile);
+	        product.setImageUrl(imagePath);
+	    }
+
+	    return ResponseEntity.ok(productRepository.save(product));
+	}
+
+	
+	@PostMapping("/upload")		// Admin Operation
+	public ResponseEntity<String> uploadImage(@RequestParam("image") MultipartFile file) throws IOException{
+		String uploadDir = "product-images/";
+		String filePath = uploadDir + UUID.randomUUID() + "_" + file.getOriginalFilename();
+		
+		File saveFile = new File(filePath);
+		saveFile.getParentFile().mkdirs(); // Ensure directory exists
+		file.transferTo(saveFile);
+		
+		return ResponseEntity.ok(filePath);
+	}
+	
+	@DeleteMapping("/{id}")		// Admin Operation
+	public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+	    if (!productRepository.existsById(id)) {
+	        return ResponseEntity.notFound().build();
+	    }
+	    productRepository.deleteById(id);
+	    return ResponseEntity.noContent().build();
+	}
+
+
+
+}
